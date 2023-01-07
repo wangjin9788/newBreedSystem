@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.AdNatureMapper">
+<select id="selectAdNatureList" resultType="com.breed.govern.dto.vo.SelectAdNatureListVo">
+    select n_id as nId,nature from ad_nature
+</select>
+</mapper>

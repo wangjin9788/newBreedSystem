@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BBreedingModeMapper">
+
+    <select id="getBreedModelList" resultType="com.breed.govern.dto.vo.BreedModelListVo">
+        SELECT m.bm_id AS bmId,
+               m.breed_model as breedModel,
+               bf.ferment_info as fermentInfo
+        FROM b_breeding_mode m
+                 LEFT JOIN b_feed_info i ON m.f_id = i.f_id
+                 LEFT JOIN b_feed_ferment bf ON bf.ff_id = i.ff_id
+    </select>
+    <select id="selectBreedModelList" resultType="com.breed.govern.dto.vo.SelectBreedModelListVo">
+        SELECT
+            bm_id AS bmId,
+            breed_model as breedModel
+        FROM
+            b_breeding_mode
+        ORDER BY
+            bm_id DESC
+    </select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BOperationLabelMapper">
+<select id="getOperationLabelList" resultType="com.breed.govern.dto.vo.OperationLabelListVo">
+  select ol_id as olId,label_content as labelContent from b_operation_label
+</select>
+
+    <select id="SelectOperationLabelListVo" resultType="com.breed.govern.dto.vo.SelectOperationLabelListVo">
+        select ol_id as olId,label_content as labelContent from b_operation_label
+    </select>
+    <select id="getOlIdByContent" resultType="long">
+        select ol_id from b_operation_label where label_content='营养';
+    </select>
+</mapper>

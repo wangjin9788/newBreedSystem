@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BExcOperationMapper">
+    <select id="getExcOperationList" resultType="com.breed.govern.dto.vo.ExcOperationListVo">
+        SELECT o.eo_id       AS eoId,
+               o.operation   AS operation,
+               o.effect      AS effect,
+               o.create_time AS createTime,
+               d.symptom     AS symptom
+        FROM b_exc_operation o
+                 LEFT JOIN b_exc_info i ON i.e_id = o.e_id
+                 LEFT JOIN ad_animal_disease d on d.ad_id = i.ad_id
+        where o.e_id = #{id}
+        ORDER BY o.create_time DESC
+    </select>
+    <select id="getOperationByeId" resultType="string">
+        SELECT operation
+        FROM b_exc_operation
+        WHERE e_id = #{eId}
+          AND effect = 2
+        ORDER BY create_time DESC LIMIT 1
+    </select>
+    <select id="getExcOperationByEid" resultType="com.breed.govern.dto.vo.GetExcOperationInfo">
+        SELECT o.eo_id       as eoId,
+               o.create_time as createTime,
+               o.operation   as operation
+        FROM b_exc_info i
+                 LEFT JOIN b_exc_operation o on o.e_id = i.e_id
+        WHERE i.e_id = #{eId}
+    </select>
+    <insert id="batchExcOperation">
+        INSERT INTO b_exc_operation (
+        e_id,
+        operation,
+        create_time
+        )
+        values
+        <foreach collection="batch.list" item="opt" separator=",">
+            (#{opt}, #{batch.operation}, now())
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.AdAnimalDiseaseMapper">
+    <select id="getAdAnimalDiseaseList" resultType="com.breed.govern.dto.vo.AdNatureListVo">
+        SELECT
+        d.ad_id AS adId,
+        n.nature AS nature,
+        d.disease_name AS diseaseName,
+        d.pathogeny,
+        d.symptom,
+        d.treatment,
+        d.img_url AS imgUrl
+        FROM
+        ad_animal_disease d
+        left JOIN ad_nature n on d.n_id=n.n_id
+        WHERE
+        1=1
+        <if test="searchName!=null and searchName!=''">
+            and MATCH (symptom) AGAINST (
+            #{searchName} IN NATURAL LANGUAGE MODE
+            )
+        </if>
+            order by  d.ad_id desc
+    </select>
+    <select id="getDiseaseExcInfo" resultType="long">
+        SELECT a.ad_id as adId
+        FROM ad_animal_disease a
+        WHERE
+            MATCH (symptom) AGAINST ( #{data} IN NATURAL LANGUAGE MODE
+            )
+            LIMIT 1
+    </select>
+</mapper>

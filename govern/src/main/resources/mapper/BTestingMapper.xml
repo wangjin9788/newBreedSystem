@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BTestingMapper">
+    <select id="getTestingList" resultType="com.breed.govern.dto.vo.TestingListVo">
+        SELECT t.tid               as tid,
+               t.weather           as weather,
+               t.temperature       as temperature,
+               t.ph                as ph,
+               t.breed_temperature as breedTemperature,
+               t.breed_humidity    as breedHumidity,
+               t.testing_time      as testingTime,
+               t.disease           as disease,
+               t.img_url           as imgUrl,
+               b.content           as content,
+               t.symptom           as symptom
+        FROM b_testing t
+                 LEFT JOIN b_operation b on b.o_id = t.o_id
+        WHERE t.b_id = #{bid};
+    </select>
+    <select id="getLabelInfo" resultType="string">
+        SELECT
+        GROUP_CONCAT(label_name SEPARATOR '-') AS NAME
+        FROM
+        b_exc_label
+        WHERE
+        l_id IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+    </select>
+    <select id="getDayTestingList" resultType="com.breed.govern.entity.BTesting">
+        SELECT
+            *
+        FROM
+            b_testing
+        WHERE
+            DATEDIFF(NOW(), testing_time) = 0
+    </select>
+</mapper>

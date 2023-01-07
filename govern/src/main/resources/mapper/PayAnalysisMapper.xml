@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.PayAnalysisMapper">
+    <select id="getPayAndRevenueAnalysis" resultType="com.breed.govern.dto.vo.PayDetailAnalysisVo">
+        select
+            any_value (date_format( da.createTime,'%Y-%m')  ) AS date,
+            any_value ( sum(da.total) ) AS pay,
+            any_value ( sum(da.revenue) ) AS revenue
+        FROM
+            (
+                SELECT
+                    any_value ( sum( ep.pay ) ) AS total,
+                    any_value ( 0 ) as  revenue,
+                    any_value ( ep.create_time ) AS createTime
+                FROM
+                    exp_pay ep
+                GROUP BY
+                    YEAR ( ep.create_time ),
+                    MONTH ( ep.create_time ) UNION ALL
+                SELECT
+                    any_value ( 0 ) AS total,
+                    any_value ( sum( er.money ) )as  revenue,
+                    any_value ( er.create_time ) AS createTime
+                FROM
+                    exp_revenue er
+                GROUP BY
+                    YEAR ( er.create_time ),
+                    MONTH ( er.create_time )
+            ) AS da
+        GROUP BY
+            YEAR ( da.createTime ),
+            MONTH ( da.createTime )
+    </select>
+
+    <select id="getPayPicAnalysis" resultType="com.breed.govern.dto.vo.PayRevenuePieAnalysisVo">
+        SELECT
+            any_value ('支出') as  type,
+            any_value ( sum(ep.pay)) AS money
+
+        FROM
+            exp_pay ep
+        where YEAR(ep.create_time)=#{time}
+        UNION all
+        SELECT
+            any_value ( '营收') AS type,
+            any_value ( sum(er.money)  )as  money
+        FROM
+            exp_revenue er
+        where YEAR(er.create_time)=#{time}
+    </select>
+
+    <select id="getPayCategoryAnalysis" resultType="com.breed.govern.dto.vo.PayCategoryPicAnalysisVo">
+        SELECT
+            any_value ( ec.type_name ) AS typeName,
+            any_value ( sum( ep.pay ) ) AS money
+        FROM
+            exp_pay ep
+                RIGHT JOIN exp_pay_revenue_category ec ON ep.prcid = ec.prcid
+        WHERE
+            YEAR ( ep.create_time ) =#{time}
+        GROUP BY
+            ep.prcid
+    </select>
+
+    <select id="getYearData" resultType="Integer">
+        SELECT
+            any_value(year(da.createTime)) as yearTime
+        FROM
+            (
+                SELECT
+                    any_value ( ep.create_time ) AS createTime
+                FROM
+                    exp_pay ep
+                GROUP BY
+                    YEAR ( ep.create_time ) UNION ALL
+                SELECT
+                    any_value ( er.create_time ) AS createTime
+                FROM
+                    exp_revenue er
+                GROUP BY
+                    YEAR ( er.create_time )
+            ) da
+        GROUP BY
+            YEAR ( da.createTime ) ORDER BY yearTime asc
+    </select>
+    <select id="getMonth" resultType="Integer">
+        SELECT
+            any_value ( MONTH ( da.createTime ) ) AS monthTime
+        FROM
+            (
+                SELECT
+                    any_value ( ep.create_time ) AS createTime
+                FROM
+                    exp_pay ep
+                GROUP BY
+                    MONTH ( ep.create_time ) UNION ALL
+                SELECT
+                    any_value ( er.create_time ) AS createTime
+                FROM
+                    exp_revenue er
+                GROUP BY
+                    MONTH ( er.create_time )
+            ) da
+        GROUP BY
+            MONTH ( da.createTime )
+        ORDER BY
+            monthTime ASC
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BFeedInfoMapper">
+    <select id="getFeedInfoList" resultType="com.breed.govern.dto.vo.FeedInfoListVo">
+        SELECT i.f_id         as fid,
+               i.mark,
+               i.ext_content  as extContent,
+               f.ferment_info as content
+        FROM b_feed_info i
+                 LEFT JOIN b_feed_ferment f
+                           on f.ff_id = i.ff_id
+                               and f.status = 1
+        ORDER BY i.f_id desc
+    </select>
+    <select id="selectFeedListVo" resultType="com.breed.govern.dto.vo.SelectFeedListVo">
+        SELECT f.f_id          as fid,
+               ff.ferment_info as fermentInfo
+        FROM b_feed_info f
+                 LEFT JOIN b_feed_ferment ff ON ff.ff_id = f.ff_id
+        ORDER BY f.f_id desc
+    </select>
+</mapper>

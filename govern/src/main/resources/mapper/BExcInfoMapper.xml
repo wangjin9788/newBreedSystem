@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BExcInfoMapper">
+    <select id="getExcInfoList" resultType="com.breed.govern.dto.vo.ExcInfoList">
+        SELECT i.e_id          AS eId,
+               i.b_id          AS bId,
+               ad.disease_name AS diseaseName,
+               ad.pathogeny    AS pathogeny,
+               ad.symptom      AS symptom,
+               ad.treatment    AS treatment,
+               i.`status`      AS status,
+               i.create_time   AS createTime,
+               i.label_name    AS labelName,
+               CONCAT(
+                       l.label_content,
+                       '----',
+                       o.content
+                   )           AS content
+        FROM b_exc_info i
+                 LEFT JOIN b_operation o ON o.o_id = i.o_id
+                 LEFT JOIN b_operation_label l ON l.ol_id = o.ol_id
+                 LEFT JOIN ad_animal_disease ad ON ad.ad_id = i.ad_id
+        ORDER BY i.create_time DESC
+    </select>
+    <select id="getEIdByBId" resultType="long">
+        SELECT
+        e_id
+        FROM
+        b_exc_info
+        WHERE
+        `status` = 0
+        and b_id in
+        <foreach collection="idList" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        ORDER BY
+        create_time DESC
+        LIMIT 1
+    </select>
+    <select id="getDayExcInfo" resultType="com.breed.govern.entity.BExcInfo">
+        SELECT i.*
+        FROM b_exc_info i
+        WHERE DATEDIFF(NOW(), i.create_time) = 0
+          AND i.`status` = 0
+          AND i.e_id NOT IN (
+            SELECT o.e_id
+            FROM b_exc_operation o
+        )
+    </select>
+</mapper>

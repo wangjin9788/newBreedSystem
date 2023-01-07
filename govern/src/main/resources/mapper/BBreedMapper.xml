@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BBreedMapper">
+    <select id="getBreedInfoList" resultType="com.breed.govern.dto.vo.BreedListVo">
+        SELECT
+            b.b_id AS bId,
+            b.number AS number,
+            b.type as type,
+            bm.breed_model AS breedModel,
+            b.extent AS extent,
+            b.input_weight AS inputWeight,
+            b.`status` as status,
+            b.breed_mark AS breedMark,
+            b.input_time AS inputTime,
+            b.specifications AS specifications,
+            i.`status` AS excStatus
+        FROM
+            b_breed b
+                LEFT JOIN b_breeding_mode bm ON b.bm_id = bm.bm_id
+                LEFT JOIN b_exc_info i ON  i.b_id = b.b_id
+        where b.status = #{status}
+          and b.type = #{type}
+        order by b.b_id asc
+    </select>
+    <select id="getBreedAllId" resultType="long">
+        select b.b_id from b_breed b
+        where b.status = 0
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BOperationMapper">
+    <select id="getOperationList" resultType="com.breed.govern.dto.vo.OperationListVo">
+        SELECT o.o_id          AS oid,
+               o.content       AS content,
+               o.create_time   AS createTime,
+               l.label_content AS labelInfo
+        FROM b_operation o
+                 LEFT JOIN b_operation_label l ON o.ol_id = l.ol_id
+        where o.b_id = #{bid}
+    </select>
+    <select id="selectOperationList" resultType="com.breed.govern.dto.vo.SelectOperationList">
+        SELECT o_id    AS oid,
+               content AS content
+        FROM b_operation
+    </select>
+    <insert id="batchOperation">
+        insert into b_operation(ol_id,b_id,content,create_time)
+        VALUES
+        <foreach collection="batch.list" item="opt" separator=",">
+            (#{batch.olId}, #{opt}, #{batch.operationContent},now())
+        </foreach>
+    </insert>
+</mapper>

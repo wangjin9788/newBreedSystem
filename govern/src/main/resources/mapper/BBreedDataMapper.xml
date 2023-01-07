@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BBreedDataMapper">
+    <select id="getBreedDataList" resultType="com.breed.govern.dto.vo.BreedDataList">
+        SELECT d.bi_id as biId,
+        d.content,
+        l.label_name as labelName
+        FROM b_breed_data d
+        left join b_breed_data_label l on l.dl_id=d.dl_id
+        WHERE 1=1
+        <if test="searchName!=null and searchName!=''">
+            AND
+            MATCH (content) AGAINST (#{searchName} IN NATURAL LANGUAGE MODE
+        )
+        </if>
+            <if test="dlId>0">
+        and d.dl_id = #{dlId}
+        </if>
+        and l.parent_id=#{menuNumber}
+    </select>
+</mapper>
