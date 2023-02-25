@@ -3,7 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-
+const webpack = require('webpack')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -12,6 +12,12 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
+  plugins: [
+    new webpack.ProvidePlugin({
+      'window.Quill': 'quill/dist/quill.js',
+      'Quill': 'quill/dist/quill.js'
+    })
+  ],
   entry: {
     app: './src/main.js'
   },
@@ -31,6 +37,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+
+        test: /\.js$/,
+
+        exclude: /node_modules(?!\/quill-image-drop-module|quill-image-resize-module)/,
+
+        loader: 'babel-loader'
+
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

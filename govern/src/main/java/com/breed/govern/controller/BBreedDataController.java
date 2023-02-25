@@ -2,6 +2,7 @@ package com.breed.govern.controller;
 
 
 import com.breed.govern.common.api.CommonResult;
+import com.breed.govern.dto.vo.BreedDataInfo;
 import com.breed.govern.dto.vo.BreedDataList;
 import com.breed.govern.dto.vo.CascaderBreedDataLabelList;
 import com.breed.govern.entity.AdNature;
@@ -73,7 +74,7 @@ public class BBreedDataController {
     }
     @ApiOperation("根据id获取模型数据")
     @GetMapping(value = "/info/{id}")
-    public CommonResult<BBreedData> getBreedDataById(@PathVariable Integer id) {
+    public CommonResult<BreedDataInfo> getBreedDataById(@PathVariable Integer id) {
         return CommonResult.success(dataService.getBreedDataById(id));
     }
 

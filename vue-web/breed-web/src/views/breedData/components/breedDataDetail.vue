@@ -1,5 +1,5 @@
 <template>
-  <el-card class="form-container" shadow="never">
+  <el-card class="form-container" shadow="never" style="width: auto">
     <el-form :model="breedData"
              ref="breedDataFrom"
              label-width="150px">
@@ -13,11 +13,12 @@
                      placeholder="请选择目录" ></el-cascader>
       </el-form-item>
       <el-form-item label="内容：" prop="breedData" isEdit>
-        <quill-editor v-model="breedData.content" ></quill-editor>
+        <VueQuill  :cont="content" v-model="breedData.content" ></VueQuill>
       </el-form-item>
 
+
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('breedDataFrom')">提交</el-button>
+        <el-button type="primary"   @click="onSubmit('breedDataFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('breedDataFrom')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -25,19 +26,16 @@
 </template>
 
 <script>
-import {getBreedInfo, cascaderLabel,fetchList,updateBreedInfo , createBreedData} from '@/api/breedData';
-import {quillEditor} from "vue-quill-editor"; //调用编辑器
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
+import {getBreedInfo, cascaderLabel,fetchList,updateBreedInfo,createBreedData} from '@/api/breedData';
+
 const defaultBreedData = {
   pageSize: 100,
   pageNum: 1,
   searchName: '',
+  content:""
 };
 export default {
   name: "BreedDataDetail",
-  components: {quillEditor},
 
   props: {
     isEdit: {
@@ -45,25 +43,39 @@ export default {
       default: false
     }
   },
+
   data() {
     return {
-      breedData: Object.assign({}, defaultBreedData),
-      selectLabelLists: cascaderLabel().then(response => {
-        this.selectLabelLists = response.data;
-      }),
+      content:"",
+      breedData:Object.assign({}, defaultBreedData),
+      selectLabelLists:[],
+
+
     }
   },
   created() {
     if (this.isEdit) {
       getBreedInfo(this.$route.query.id).then(response => {
         this.breedData = response.data;
+        this.content=response.data.content;
+      });
+      cascaderLabel().then(response => {
+        this.selectLabelLists = response.data;
       });
     } else {
       this.breedData = Object.assign({}, defaultBreedData);
     }
 
   },
+  mounted() {
+    // _isMounted是当前实例mouned()是否执行 此时为false
+    window.parentMounted = this._isMounted;
+  },
   methods: {
+    accept(obj){
+      this.childValue = obj
+      console.log(obj)
+    },
     getSelectBreedDataList() {
       fetchList(0, this.breedData).then(response => {
         this.selectBreedDataList = response.data;

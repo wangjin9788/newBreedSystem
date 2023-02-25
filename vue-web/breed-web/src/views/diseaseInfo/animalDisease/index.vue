@@ -54,17 +54,17 @@
 
         <el-table-column label="病因" align="center">
           <template slot-scope="scope" >
-            <span v-html="showDate(scope.row.pathogeny)"></span>
+            <span class="ql-editor" v-html="showDate(scope.row.pathogeny)"></span>
           </template>
         </el-table-column>
         <el-table-column label="症状" align="center">
           <template slot-scope="scope">
-          <span v-html="showDate(scope.row.symptom)"></span>
+          <span class="ql-editor" v-html="showDate(scope.row.symptom)"></span>
           </template>
         </el-table-column>
         <el-table-column label="治疗方法" align="center">
           <template slot-scope="scope">
-            <span v-html="scope.row.treatment"></span>
+            <span class="ql-editor"  v-html="scope.row.treatment"></span>
           </template>
         </el-table-column>
         <el-table-column label="图片" align="center">

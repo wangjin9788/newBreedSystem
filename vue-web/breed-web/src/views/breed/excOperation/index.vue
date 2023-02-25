@@ -47,12 +47,12 @@
         </el-table-column>
         <el-table-column label="症状" align="center">
           <template slot-scope="scope">
-          <span v-html="scope.row.symptom"></span>
+          <span class="ql-editor" v-html="scope.row.symptom"></span>
           </template>
         </el-table-column>
         <el-table-column label="操作内容" align="center">
           <template slot-scope="scope">
-          <span v-html="scope.row.operation"></span>
+          <span class="ql-editor" v-html="scope.row.operation"></span>
           </template>
         </el-table-column>
         <el-table-column label="评价" align="center">

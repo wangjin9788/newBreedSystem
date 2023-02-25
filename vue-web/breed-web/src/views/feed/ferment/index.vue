@@ -47,7 +47,7 @@
         </el-table-column>
         <el-table-column label="发酵原料" align="center">
           <template slot-scope="scope">
-            <span v-html="scope.row.fermentInfo"></span>
+            <span class="ql-editor" v-html="scope.row.fermentInfo"></span>
           </template>
         </el-table-column>
         <el-table-column label="发酵天数" align="center">

@@ -65,7 +65,7 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <span v-html="scope.row.markMethod"></span>
+            <span class="ql-editor" v-html="scope.row.markMethod"></span>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="160" align="center">

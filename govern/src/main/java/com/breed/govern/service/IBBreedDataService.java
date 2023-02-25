@@ -1,5 +1,6 @@
 package com.breed.govern.service;
 
+import com.breed.govern.dto.vo.BreedDataInfo;
 import com.breed.govern.dto.vo.BreedDataList;
 import com.breed.govern.dto.vo.CascaderBreedDataLabelList;
 import com.breed.govern.entity.BBreedData;
@@ -25,7 +26,7 @@ public interface IBBreedDataService extends IService<BBreedData> {
 
     Integer deleteBreedData(Long id);
 
-    BBreedData getBreedDataById(Integer id);
+    BreedDataInfo getBreedDataById(Integer id);
 
     List<BBreedDataLabel> selectBreedDataLabelInfo(Integer dlId);
     List<CascaderBreedDataLabelList> cascaderBreedDataLabelInfo();

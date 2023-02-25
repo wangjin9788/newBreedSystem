@@ -54,12 +54,12 @@
         </el-table-column>
         <el-table-column label="饲料内容" align="center">
           <template slot-scope="scope">
-            <span v-html="scope.row.content"></span>
+            <span class="ql-editor" v-html="scope.row.content"></span>
           </template>
         </el-table-column>
         <el-table-column label="额外内容" align="center">
           <template slot-scope="scope">
-            <span v-html="scope.row.extContent"></span>
+            <span class="ql-editor" v-html="scope.row.extContent"></span>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="160" align="center">

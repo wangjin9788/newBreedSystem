@@ -33,6 +33,14 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import Quill from 'quill'
+
+import resizeImage from 'quill-image-resize-module' // 图片缩放组件引用
+import { ImageDrop } from 'quill-image-drop-module'; // 图片拖动组件引用
+Quill.register('modules/imageDrop', ImageDrop); // 注册
+Quill.register('modules/resizeImage ', resizeImage ) // 注册
+import VueQuill from '@/components/VueQuillEditor/index'
+Vue.use(VueQuill)
 
 Vue.use(VueQuillEditor)
 new Vue({

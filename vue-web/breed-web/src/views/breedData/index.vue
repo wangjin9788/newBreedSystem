@@ -21,14 +21,7 @@
           size="mini">
           添加
         </el-button>
-        <el-button
-          style="float:right;margin-right: 15px;margin-top: 20px"
-          type="primary"
-          class="btn-add"
-          @click="updateBreedData()"
-          size="mini">
-          编辑
-        </el-button>
+
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="目录：">
             <el-form :inline="true" :model="listQuery" size="small" label-width="20px">
@@ -51,18 +44,28 @@
       </div>
     </el-card>
 
-    <div class="table-container">
-        <el-collapse v-for="(item,index) in list"  :key="index" accordion>
-          <el-collapse-item  :title="'' + item.labelName + ''" :name="''+index+''">
-            <span v-html="showDate(item.content)"></span>
-          </el-collapse-item>
-        </el-collapse>
+    <div  class="table-container">
+      <el-collapse  v-for="(item,index) in list" :key="index" accordion>
+        <el-collapse-item style="font-size: 100px" :title="'' + item.labelName + ''" :name="''+index+''">
+          <div style="border-style:double; padding:20px; background:#C2D8AA; color:#596C44 ">
+            <el-button
+              style="float:right;margin-right: 15px;margin-top: 20px"
+              type="primary"
+              class="btn-add"
+              @click="updateBreedData(item.biId)"
+              size="mini">
+              编辑
+            </el-button>
+            <span class="ql-editor" v-html="showDate(item.content)"></span>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
     </div>
   </div>
 </template>
 <script>
 import {fetchList, selectLabel} from '@/api/breedData';
-
+import SingleUpload from '@/components/Upload/singleUpload';
 const defaultListQuery = {
   searchName: '',
   menuNumber: 0,
@@ -76,7 +79,7 @@ export default {
       adId: '',
       listLoading: false,
       selectLabelLists: null,
-      list:[]
+      list: []
 
     }
   },
@@ -109,16 +112,9 @@ export default {
       this.$router.push('/breedData/addBreedData');
     },
     /**跳转添加 **/
-    updateBreedData() {
-      if (this.adId == '') {
-        this.$confirm('暂时没有数据修改', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-      } else {
-        this.$router.push({path: '/breedData/updateBreedData', query: {id: this.adId}});
-      }
+    updateBreedData(val) {
+      this.$router.push({path: '/breedData/updateBreedData', query: {id: val}});
+
     },
     /**
      * 加载页面数据
@@ -152,6 +148,12 @@ export default {
 
 .el-table .success-row {
   background: #ecf9eb;
+}
+.el-collapse-item__content {
+  padding-bottom: 0px;
+  font-size: 13px;
+  color: #303133;
+  line-height: 1.769230769230769;
 }
 </style>
 

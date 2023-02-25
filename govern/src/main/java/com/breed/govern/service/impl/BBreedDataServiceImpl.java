@@ -1,6 +1,7 @@
 package com.breed.govern.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.breed.govern.dto.vo.BreedDataInfo;
 import com.breed.govern.dto.vo.BreedDataList;
 import com.breed.govern.dto.vo.CascaderBreedDataLabelItem;
 import com.breed.govern.dto.vo.CascaderBreedDataLabelList;
@@ -53,8 +54,10 @@ public class BBreedDataServiceImpl extends ServiceImpl<BBreedDataMapper, BBreedD
     }
 
     @Override
-    public BBreedData getBreedDataById(Integer id) {
-        return baseMapper.selectById(id);
+    public BreedDataInfo getBreedDataById(Integer id) {
+        BreedDataInfo info = baseMapper.getBreedDataById(id);
+        info.setIdList(new int[]{info.getParentId(),info.getDlId()});
+        return info;
     }
 
     @Override

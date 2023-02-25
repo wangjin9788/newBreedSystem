@@ -1,5 +1,6 @@
 package com.breed.govern.mapper;
 
+import com.breed.govern.dto.vo.BreedDataInfo;
 import com.breed.govern.dto.vo.BreedDataList;
 import com.breed.govern.entity.BBreedData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,4 +22,6 @@ public interface BBreedDataMapper extends BaseMapper<BBreedData> {
                                          @Param(value = "searchName") String searchName,
                                          @Param(value = "dlId") Integer dlId
                                 );
+
+    BreedDataInfo getBreedDataById(@Param(value = "id")Integer id);
 }
