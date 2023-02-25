@@ -65,7 +65,6 @@
 </template>
 <script>
 import {fetchList, selectLabel} from '@/api/breedData';
-import SingleUpload from '@/components/Upload/singleUpload';
 const defaultListQuery = {
   searchName: '',
   menuNumber: 0,
@@ -123,7 +122,7 @@ export default {
       fetchList(this.listQuery).then(response => {
         this.list = response.data;
         this.$forceUpdate() //强制渲染
-      }).catch(err => {
+      }).catch(() => {
         this.content = '';
       });
 
