@@ -67,10 +67,7 @@ export default {
     }
 
   },
-  mounted() {
-    // _isMounted是当前实例mouned()是否执行 此时为false
-    window.parentMounted = this._isMounted;
-  },
+
   methods: {
     accept(obj){
       this.childValue = obj

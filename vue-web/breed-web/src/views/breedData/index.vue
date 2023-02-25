@@ -25,7 +25,7 @@
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="目录：">
             <el-form :inline="true" :model="listQuery" size="small" label-width="20px">
-              <el-select v-model="listQuery.dlId" placeholder="请选择目录" style="display: block">
+              <el-select v-model="listQuery.dlId" placeholder="请选择目录" style="display: block"  @change="handleSearchList">
                 <el-option
                   v-for="item in selectLabelLists"
                   :key="item.dlId"
