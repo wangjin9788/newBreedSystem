@@ -32,7 +32,7 @@ Quill.register('modules/imageDrop', ImageDrop)
 Quill.register('modules/imageResize', ImageResize)
 
 //自定义字体类型
-var fonts = [
+const fonts = [
   "SimSun",
   "SimHei",
   "Microsoft-YaHei",
@@ -42,13 +42,13 @@ var fonts = [
   "Times-New-Roman",
   "sans-serif"
 ];
-var Font = Quill.import("formats/font");
+const Font = Quill.import("formats/font");
 Font.whitelist = fonts; //将字体加入到白名单
 Quill.register(Font, true);
 const toolbarOptions = [
   [{color: []}, {background: []}],
   ["bold", "italic", "underline", "strike"],
-  [{size: ["small", false, "large"]}],
+  [{size: ['small', false, 'large', 'huge']}],
   [{list: "ordered"}, {list: "bullet"}],
   [{script: "sub"}, {script: "super"}],
   [{indent: "-1"}, {indent: "+1"}],

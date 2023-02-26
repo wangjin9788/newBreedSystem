@@ -1,5 +1,5 @@
 <template>
-  <el-card class="form-container" shadow="never" style="width: auto">
+  <el-card class="form-container" shadow="never" style="width: auto;height: auto">
     <el-form :model="breedData"
              ref="breedDataFrom"
              label-width="200px">
@@ -32,7 +32,9 @@ const defaultBreedData = {
   pageSize: 100,
   pageNum: 1,
   searchName: '',
-  content:""
+  content:"",
+  biId:0,
+  idList:[]
 };
 export default {
   name: "BreedDataDetail",
@@ -56,7 +58,6 @@ export default {
   created() {
     cascaderLabel().then(response => {
       this.selectLabelLists = response.data;
-      console.log(this.selectLabelLists+"-------------")
     });
     if (this.isEdit) {
       getBreedInfo(this.$route.query.id).then(response => {
@@ -71,10 +72,6 @@ export default {
   },
 
   methods: {
-    accept(obj){
-      this.childValue = obj
-      console.log(obj)
-    },
     getSelectBreedDataList() {
       fetchList(0, this.breedData).then(response => {
         this.selectBreedDataList = response.data;

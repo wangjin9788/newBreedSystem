@@ -20,13 +20,14 @@
     </select>
     <select id="getBreedDataById" resultType="com.breed.govern.dto.vo.BreedDataInfo">
         SELECT
-            b.bi_id as biId,
-            b.content as content,
-            b.dl_id as dlId,
-            l.parent_id as parentId
+            b.bi_id AS biId,
+            b.content AS content,
+            b.dl_id AS dlId,
+            l.parent_id AS parentId
         FROM
             b_breed_data b
                 LEFT JOIN b_breed_data_label l ON l.dl_id = b.dl_id
+        WHERE b.bi_id=#{id}
 
     </select>
 </mapper>
