@@ -9,8 +9,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
     enabled: true #开启文件上传
-    max-file-size: 10MB #限制文件上传大小为10M
   # 初始化物理连接个数
   initial-size: 1
   # 最大连接池数量

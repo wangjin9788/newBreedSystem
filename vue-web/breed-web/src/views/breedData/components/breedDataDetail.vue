@@ -2,7 +2,7 @@
   <el-card class="form-container" shadow="never" style="width: auto">
     <el-form :model="breedData"
              ref="breedDataFrom"
-             label-width="150px">
+             label-width="200px">
       <el-form-item v-show="false" label="id：" prop="breedData" isEdit>
         <el-input v-model.trim="breedData.biId"></el-input>
       </el-form-item>
@@ -54,14 +54,16 @@ export default {
     }
   },
   created() {
+    cascaderLabel().then(response => {
+      this.selectLabelLists = response.data;
+      console.log(this.selectLabelLists+"-------------")
+    });
     if (this.isEdit) {
       getBreedInfo(this.$route.query.id).then(response => {
         this.breedData = response.data;
         this.content=response.data.content;
       });
-      cascaderLabel().then(response => {
-        this.selectLabelLists = response.data;
-      });
+
     } else {
       this.breedData = Object.assign({}, defaultBreedData);
     }
