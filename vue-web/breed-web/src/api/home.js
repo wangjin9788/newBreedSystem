@@ -1,7 +1,7 @@
 import request from '@/utils/request'
-export function getPayAndRevenue() {
+export function getPayAndRevenue(monthPic) {
   return request({
-    url: '/pay-analysis/pay_revenue_analysis',
+    url: '/pay-analysis/pay_revenue_analysis/'+monthPic,
     method: 'get',
   })
 }

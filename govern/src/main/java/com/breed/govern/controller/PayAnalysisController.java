@@ -24,9 +24,9 @@ public class PayAnalysisController {
 
 
     @ApiOperation("支出营收统计-柱状图")
-    @GetMapping(value = "/pay_revenue_analysis")
-    public CommonResult<List<PayDetailAnalysisVo>> getPayAndRevenueAnalysis() {
-        List<PayDetailAnalysisVo> payAndRevenueAnalysis = payAnalysisService.getPayAndRevenueAnalysis();
+    @GetMapping(value = "/pay_revenue_analysis/{monthPic}")
+    public CommonResult<List<PayDetailAnalysisVo>> getPayAndRevenueAnalysis(@PathVariable("monthPic") String monthPic) {
+        List<PayDetailAnalysisVo> payAndRevenueAnalysis = payAnalysisService.getPayAndRevenueAnalysis(monthPic);
         return CommonResult.success(payAndRevenueAnalysis);
     }
 

@@ -8,12 +8,13 @@ import com.breed.govern.service.IPayAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class PayAnalysisServiceImpl  implements IPayAnalysisService {
 
-    @Autowired
+    @Resource
     private PayAnalysisMapper analysisMapper;
 
 
@@ -22,8 +23,8 @@ public class PayAnalysisServiceImpl  implements IPayAnalysisService {
      * @return
      */
     @Override
-    public List<PayDetailAnalysisVo> getPayAndRevenueAnalysis() {
-       return analysisMapper.getPayAndRevenueAnalysis();
+    public List<PayDetailAnalysisVo> getPayAndRevenueAnalysis(String time) {
+       return analysisMapper.getPayAndRevenueAnalysis(time);
     }
 
     /**

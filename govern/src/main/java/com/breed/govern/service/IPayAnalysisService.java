@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IPayAnalysisService {
 
-    List<PayDetailAnalysisVo> getPayAndRevenueAnalysis();
+    List<PayDetailAnalysisVo> getPayAndRevenueAnalysis(String time);
 
     List<PayRevenuePieAnalysisVo> getPayPicAnalysis(String time);
 

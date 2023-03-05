@@ -27,6 +27,7 @@
                     YEAR ( er.create_time ),
                     MONTH ( er.create_time )
             ) AS da
+        where YEAR(da.createTime)=#{time}
         GROUP BY
             YEAR ( da.createTime ),
             MONTH ( da.createTime )

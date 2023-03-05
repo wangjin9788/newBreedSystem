@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PayAnalysisMapper {
 
-    List<PayDetailAnalysisVo> getPayAndRevenueAnalysis();
+    List<PayDetailAnalysisVo> getPayAndRevenueAnalysis(@Param("time") String time);
 
     List<PayRevenuePieAnalysisVo> getPayPicAnalysis(@Param("time") String time);
 
