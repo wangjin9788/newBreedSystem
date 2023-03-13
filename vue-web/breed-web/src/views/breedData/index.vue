@@ -36,7 +36,7 @@
             </el-form>
           </el-form-item>
           <el-form-item label="输入搜索：">
-            <el-input v-model="listQuery.searchName" placeholder="请输入查询关键字"></el-input>
+            <el-input v-model="listQuery.searchName" placeholder="请输入查询关键字" clearable></el-input>
           </el-form-item>
 
         </el-form>

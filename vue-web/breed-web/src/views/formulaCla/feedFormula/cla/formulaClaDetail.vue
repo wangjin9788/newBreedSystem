@@ -13,7 +13,7 @@
         <el-col :span="13">
           <el-form-item label="预计重量">
             <el-input v-model="cla.weight">
-              <el-select v-model="cla.weightUnit" slot="prepend" placeholder="请选择" @change="conversionUnit()">
+              <el-select v-model="cla.weightUnit" slot="prepend" placeholder="请选择" @change="changeWight()">
                 <el-option label="斤" value="斤"></el-option>
                 <el-option label="克" value="克"></el-option>
                 <el-option label="千克" value="千克"></el-option>
@@ -92,7 +92,8 @@ export default {
         unit: [
           {required: true, message: '请输入菜单名称', trigger: 'blur'},
         ]
-      }
+      },
+      mark:1
     }
   },
   created() {
@@ -146,6 +147,13 @@ export default {
       this.$refs[formName].resetFields();
       this.cla = Object.assign({}, defaultcla);
       this.getSelectclaList();
+    },
+    changeWight(){
+      if(this.mark==1) {
+        this.mark=this.mark+1;
+        this.cla.unit = this.cla.weightUnit;
+      }
+      this.conversionUnit()
     },
     conversionUnit(){
       let weight=this.cla.weight;
