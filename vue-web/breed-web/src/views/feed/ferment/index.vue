@@ -102,6 +102,12 @@
                          @click="handleDelete(scope.$index, scope.row)">删除
               </el-button>
             </el-row>
+            <el-row>
+              <el-button size="mini"
+                         type="text"
+                         @click="handleDetail(scope.$index, scope.row)">发酵详情
+              </el-button>
+            </el-row>
           </template>
         </el-table-column>
       </el-table>
@@ -186,7 +192,10 @@ export default {
     handleEndTestingInfo(index, row) {
       this.$router.push({path: '/feed/fermentTesting', query: {id: row.ffId}});
     },
-
+    /**跳转发酵详情信息 **/
+    handleDetail(index, row) {
+      this.$router.push({path: '/feed/fermentDetail', query: {id: row.ffId}});
+    },
     /** 删除页面**/
     handleDelete(index, row) {
       this.$confirm('是否要删除该养殖记录?', '提示', {

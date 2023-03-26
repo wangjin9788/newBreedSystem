@@ -369,7 +369,27 @@ export const asyncRouterMap = [
         meta: {title: '查看发酵结束检测信息'},
         hidden: true
       },
-
+      {
+        path: 'fermentDetail',
+        name: 'fermentDetail',
+        component: () => import('@/views/feed/ferment/detail/index'),
+        meta: {title: '查看发酵详情'},
+        hidden: true
+      },
+      {
+        path: 'addFermentDetail',
+        name: 'addFermentDetail',
+        component: () => import('@/views/feed/ferment/detail/add'),
+        meta: {title: '添加发酵详情'},
+        hidden: true
+      },
+      {
+        path: 'updateFermentDetail',
+        name: 'updateFermentDetail',
+        component: () => import('@/views/feed/ferment/detail/update'),
+        meta: {title: '修改发酵详情'},
+        hidden: true
+      },
     ]
   },
   {
