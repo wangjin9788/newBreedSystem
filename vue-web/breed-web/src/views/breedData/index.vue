@@ -56,7 +56,7 @@
               size="mini">
               编辑
             </el-button>
-            <span class="ql-editor" v-html="showDate(item.content)"></span>
+            <span class="ql-editor" v-viewer v-html="showDate(item.content)"></span>
           </div>
         </el-collapse-item>
       </el-collapse>
