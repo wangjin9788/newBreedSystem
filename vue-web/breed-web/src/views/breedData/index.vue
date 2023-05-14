@@ -25,7 +25,7 @@
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="目录：">
             <el-form :inline="true" :model="listQuery" size="small" label-width="20px">
-              <el-select v-model="listQuery.dlId" placeholder="请选择目录" style="display: block"  @change="handleSearchList">
+              <el-select v-model="listQuery.dlId" placeholder="请选择目录" style="display: block" @change="handleSearchList">
                 <el-option
                   v-for="item in selectLabelLists"
                   :key="item.dlId"
@@ -44,27 +44,30 @@
       </div>
     </el-card>
 
-    <div  class="table-container">
-      <el-collapse  v-for="(item,index) in list" :key="index" accordion>
-        <el-collapse-item style="font-size: 100px" :title="'' + item.labelName + ''" :name="''+index+''">
-          <div style="border-style:double; padding:20px; background:#C2D8AA; color:#596C44 ">
-            <el-button
-              style="float:right;margin-right: 15px;margin-top: 20px"
-              type="primary"
-              class="btn-add"
-              @click="updateBreedData(item.biId)"
-              size="mini">
-              编辑
-            </el-button>
-            <span class="ql-editor" v-viewer v-html="showDate(item.content)"></span>
-          </div>
-        </el-collapse-item>
+    <div class="table-container">
+      <el-collapse  accordion>
+        <template v-for="(item,index) in list">
+          <el-collapse-item style="font-size: 20px;" :title="'' + item.labelName + ''" :name="''+index+''">
+            <div style="border-style:double; padding:20px; background:#C2D8AA; color:#596C44 ">
+              <el-button
+                style="float:right;margin-right: 15px;margin-top: 20px"
+                type="primary"
+                class="btn-add"
+                @click="updateBreedData(item.biId)"
+                size="mini">
+                编辑
+              </el-button>
+              <span class="ql-editor" v-viewer v-html="showDate(item.content)"></span>
+            </div>
+          </el-collapse-item>
+        </template>
       </el-collapse>
     </div>
   </div>
 </template>
 <script>
 import {fetchList, selectLabel} from '@/api/breedData';
+
 const defaultListQuery = {
   searchName: '',
   menuNumber: 0,
@@ -148,11 +151,16 @@ export default {
 .el-table .success-row {
   background: #ecf9eb;
 }
+
 .el-collapse-item__content {
   padding-bottom: 0px;
   font-size: 13px;
   color: #303133;
   line-height: 1.769230769230769;
+}
+.el-collapse .el-collapse-item__header {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
 
