@@ -64,9 +64,11 @@ public class BTestingServiceImpl extends ServiceImpl<BTestingMapper, BTesting> i
     public List<TestingListVo> getTestingList(long bid) {
         List<TestingListVo> data = baseMapper.getTestingList(bid);
         for (TestingListVo vo: data) {
-            if(vo.getSymptom()!=null){
+            if(vo.getSymptom()!=null) {
                 List<Integer> strings = JSONObject.parseArray(vo.getSymptom().toString(), Integer.class);
-                vo.setSymptomName(baseMapper.getLabelInfo(strings));
+                if (strings!=null&&strings.size()>0) {
+                    vo.setSymptomName(baseMapper.getLabelInfo(strings));
+                }
             }
         }
         return data;
@@ -90,13 +92,16 @@ public class BTestingServiceImpl extends ServiceImpl<BTestingMapper, BTesting> i
     private void checkExcInfo(BTesting data){
         String labelInfo=null;
         //获取对应的标签
-        if(data.getSymptom()!=null) {
+        if(data.getSymptom()!=null&&data.getSymptom().size()>0) {
             //添加选择量
             excLabelMapper.batchExcLabelCount(data.getSymptom());
             List<Integer> strings = JSONObject.parseArray(data.getSymptom().toString(), Integer.class);
              labelInfo = baseMapper.getLabelInfo(strings);
         }
         //获取总结表信息
+        if(labelInfo==null){
+            return;
+        }
         long adId = summaryService.getSummaryByLabel(labelInfo);
         if(adId==0){
             //获取疾病信息表

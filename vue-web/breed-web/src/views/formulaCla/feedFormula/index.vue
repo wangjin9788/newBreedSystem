@@ -144,7 +144,7 @@ export default {
     },
     /**跳转编辑 **/
     handleUpdate(index, row) {
-      this.$router.push({path: '/formulaCla/formulaInfoCla', query: {id: row.bfId}});
+      this.$router.push({path: '/formulaCla/formulaInfoCla', query: {id: row.bfId,mark: row.type}});
     },
 
     /**

@@ -35,7 +35,8 @@ import {fetchList, createBreedModel,updateBreedModel,getBreedModelInfo} from '@/
 import { selectFeedList } from '@/api/feedInfo';
 
 const defaultBreedModel = {
-  status: 0
+  status: 0,
+  fId:0
 };
 export default {
   name: "breedModelDetail",

@@ -17,19 +17,13 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="发酵饲料信息：">
-        <el-select v-model="feedInfo.ffId" placeholder="请选择饲料" style="display: block">
-          <el-option
-            v-for="item in selectFeedFermentLists"
-            :key="item.ffId"
-            :label="item.fermentInfo"
-            :value="item.ffId">
-          </el-option>
-        </el-select>
+      <el-form-item label="发酵饲料信息：" v-if="!isEdit">
+        <quill-editor v-model="feedInfo.content" >
+        </quill-editor>
       </el-form-item>
 
       <el-form-item label="额外内容：" prop="ferment" isEdit>
-        <quill-editor v-model="feedInfo.fermentInfo" >
+        <quill-editor v-model="feedInfo.extContent" >
         </quill-editor>
       </el-form-item>
       <el-form-item>
@@ -48,10 +42,6 @@ import {
   getFeedInfo
 } from '@/api/feedInfo';
 
-import {
-  selectFermentList
-} from '@/api/ferment';
-
 
 const defaultFeedInfo = {
   status: 0
@@ -67,9 +57,6 @@ export default {
   data() {
     return {
       feedInfo: Object.assign({}, defaultFeedInfo),
-      selectFeedFermentLists: selectFermentList().then(response => {
-        this.selectFeedFermentLists = response.data;
-      }),
       option: [{mark: 0, value: '基料'}, {mark: 1, value: '添加饲料'}]
     }
   },

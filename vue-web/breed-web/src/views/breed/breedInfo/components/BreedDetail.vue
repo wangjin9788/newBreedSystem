@@ -59,7 +59,7 @@
           placeholder="选择日期时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item  label="投入重量(斤)：" prop="breed" isEdit>
+      <el-form-item  label="投入重量(条)：" prop="breed" isEdit>
         <el-input v-model.trim="breed.inputWeight"></el-input>
       </el-form-item>
       <el-form-item  label="养殖面积㎡：" prop="breed" isEdit>

@@ -48,6 +48,7 @@ public class BFeedInfoServiceImpl extends ServiceImpl<BFeedInfoMapper, BFeedInfo
 
     @Override
     public List<SelectFeedListVo> selectFeedList() {
-        return baseMapper.selectFeedListVo();
+        List<SelectFeedListVo> selectFeedListVos = baseMapper.selectFeedListVo();
+        return selectFeedListVos;
     }
 }

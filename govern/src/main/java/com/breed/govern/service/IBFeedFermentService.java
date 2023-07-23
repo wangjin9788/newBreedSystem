@@ -26,9 +26,9 @@ public interface IBFeedFermentService extends IService<BFeedFerment> {
 
     Integer updateStatus(BFermentTesting data);
 
-    List<FermentListVo> getFermentList( String selectDay);
+    List<FermentListVo> getFermentList(int fermentStatus);
 
-    BFeedFerment getFeedFermentById( Integer id);
+    BFeedFerment getFeedFermentById( long id);
 
     List<SelectFermentListVo> getSelectFermentList();
 }

@@ -10,14 +10,9 @@
         create_Image as createImage
         from b_feed_ferment
         <where>
-            1=1
-            <if test="year!=''">
-                and year(ferment_time)=#{year}
-            </if>
-            <if test="month!=''">
-                and month(ferment_time)=#{month}
-            </if>
+        status =#{fermentStatus}
         </where>
+        order by ferment_time desc
     </select>
     <select id="getSelectFermentList" resultType="com.breed.govern.dto.vo.SelectFermentListVo">
         SELECT f.ff_id        as ffId,

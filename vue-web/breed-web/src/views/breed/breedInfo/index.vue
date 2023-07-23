@@ -72,7 +72,7 @@
         <el-table-column label="养殖面积㎡" align="center">
           <template slot-scope="scope">{{ scope.row.extent }}</template>
         </el-table-column>
-        <el-table-column label="投入重量(斤)" align="center">
+        <el-table-column label="投入重量(条)" align="center">
           <template slot-scope="scope">{{ scope.row.inputWeight }}</template>
         </el-table-column>
         <el-table-column label="健康状态" align="center">
@@ -117,7 +117,6 @@
                          @click="handleOutInfo(scope.$index, scope.row)">产出信息
               </el-button>
             </el-row>
-            <>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="160" align="center">

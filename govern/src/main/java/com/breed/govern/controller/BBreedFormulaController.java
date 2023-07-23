@@ -94,6 +94,7 @@ public class BBreedFormulaController {
                 BFeedFerment ferment =new BFeedFerment();
                 ferment.setStatus(0);
                 ferment.setFermentInfo(str.toString());
+                ferment.setMark(data.getMark());
                 ferment.setFermentTime(LocalDateTime.now());
                 fermentService.createFeedFerment(ferment);
             }

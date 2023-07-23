@@ -13,4 +13,5 @@ public class SendFormulaMallParam {
     private Integer radio;
     private String markMethod;
     private String weightUnit;
+    private int mark;
 }

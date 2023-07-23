@@ -39,7 +39,8 @@ const defaultFerment = {
   pageSize: 100,
   pageNum: 1,
   selectDay: '',
-  ffId:0
+  ffId:0,
+  fermentStatus:0,
 };
 export default {
   name: "fermentDetail",
@@ -75,27 +76,13 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            if(this.ferment.pungentOdor=='0'){
               updateFermentStatus(this.ferment).then(response => {
-                this.$refs[formName].resetFields();
-                this.resetForm(formName);
                 this.$message({
                   message: '提交成功',
                   type: 'success',
                   duration: 1000
                 });
-
-                this.$router.back();
               });
-            }else{
-              this.$confirm('还有刺激性气味建议继续发酵', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-              }).then(() => {
-                this.$router.back();
-              })
-            }
           });
 
         } else {
@@ -107,11 +94,6 @@ export default {
           return false;
         }
       });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-      this.ferment = Object.assign({}, defaultFerment);
-      this.getSelectFermentList();
     },
   }
 }

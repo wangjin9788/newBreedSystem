@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,7 +28,8 @@ public class BFermentDetailController {
     @ApiOperation("添加发酵信息")
     @PostMapping(value = "/create")
     public CommonResult createFermentDetail(@RequestBody BFermentDetail data) {
-
+        LocalDateTime localDateTime = data.getCreateTime().plusHours(8);
+        data.setCreateTime(localDateTime);
         int count = fermentDetailService.createFermentDetail(data);
         if (count > 0) {
             return CommonResult.success(count);
@@ -39,7 +41,8 @@ public class BFermentDetailController {
     @ApiOperation("修改发酵信息")
     @PostMapping(value = "/update")
     public CommonResult updateFermentDetail(@RequestBody BFermentDetail data) {
-
+        LocalDateTime localDateTime = data.getCreateTime().plusHours(8);
+        data.setCreateTime(localDateTime);
         int count = fermentDetailService.updateFermentDetail(data);
         if (count > 0) {
             return CommonResult.success(count);

@@ -41,7 +41,7 @@ public class BTesting implements Serializable {
     /**
      * 正常操作表id
      */
-    private Long oId;
+    private long oId;
 
     /**
      * 天气

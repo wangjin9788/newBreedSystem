@@ -47,7 +47,10 @@ public class BFeedFerment implements Serializable {
      * 发酵前图片
      */
     private String createImage;
-
+    /**
+     * 标志（0：基料 1：添加饲料）
+     */
+    private int mark;
 
 
 }

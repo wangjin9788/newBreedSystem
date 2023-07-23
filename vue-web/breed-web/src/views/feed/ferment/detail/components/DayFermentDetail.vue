@@ -4,16 +4,23 @@
              ref="fermentFrom"
              label-width="150px">
 
-      <el-form-item  label="发酵堆编号：" prop="ferment" isEdit>
+      <el-form-item label="发酵堆编号：" prop="ferment" isEdit>
         <el-input readonly v-model.trim="ferment.ffId"></el-input>
       </el-form-item>
-      <el-form-item  label="气温：" prop="ferment" isEdit>
-        <el-input  v-model.trim="ferment.head"></el-input>
+      <el-form-item label="气温：" prop="ferment" isEdit>
+        <el-input v-model.trim="ferment.head"></el-input>
       </el-form-item>
-      <el-form-item  label="堆温：" prop="ferment" isEdit>
-        <el-input  v-model.trim="ferment.heapHead"></el-input>
+      <el-form-item label="堆温：" prop="ferment" isEdit>
+        <el-input v-model.trim="ferment.heapHead"></el-input>
       </el-form-item>
+      <el-form-item label="时间：" prop="ferment">
+        <el-date-picker
+          v-model="ferment.createTime"
+          type="datetime"
+          placeholder="选择日期时间">
+        </el-date-picker>
 
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('fermentFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('fermentFrom')">重置</el-button>
@@ -24,10 +31,12 @@
 
 <script>
 import {createFermentDetail, updateFermentDetail, getFermentDetailInfo, fetchList} from '@/api/dayFermentDetail';
+
 const defaultFerment = {
   pageSize: 100,
   pageNum: 1,
-  ffId:0,
+  ffId: 0,
+  createTime: ''
 };
 export default {
   name: "fermentDetail",
@@ -43,7 +52,6 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.ffId)
     if (this.isEdit) {
       getFermentDetailInfo(this.$route.query.id).then(response => {
         this.ferment = response.data;
@@ -51,7 +59,7 @@ export default {
     } else {
       this.ferment = Object.assign({}, defaultFerment);
     }
-    this.ferment.ffId=this.$route.query.ffId;
+    this.ferment.ffId = this.$route.query.ffId;
     console.log(this.ferment.ffId)
   },
   methods: {

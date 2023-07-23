@@ -49,7 +49,7 @@ public class BFermentTesting implements Serializable {
      */
     private Double ph;
 
-    private  Long ffId;
+    private  long ffId;
 
 
 }

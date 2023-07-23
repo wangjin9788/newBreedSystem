@@ -69,13 +69,14 @@ public class BFeedFermentController {
 
     @ApiOperation("获取发酵列表")
     @GetMapping(value = "/list")
-    public CommonResult<List<FermentListVo>> getFermentList(@RequestParam(value = "selectDay",required = false) String selectDay) {
-        return CommonResult.success(fermentService.getFermentList(selectDay));
+    public CommonResult<List<FermentListVo>> getFermentList(@RequestParam(value = "selectDay",required = false) String selectDay,
+                                                            @RequestParam(value = "fermentStatus",required = false) int fermentStatus) {
+        return CommonResult.success(fermentService.getFermentList(fermentStatus));
     }
 
     @ApiOperation("根据id获取发酵信息")
     @GetMapping(value = "/info/{id}")
-    public CommonResult<BFeedFerment> getFeedFermentById(@PathVariable Integer id) {
+    public CommonResult<BFeedFerment> getFeedFermentById(@PathVariable long id) {
         return CommonResult.success(fermentService.getFeedFermentById(id));
     }
 

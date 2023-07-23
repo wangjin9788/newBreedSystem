@@ -1,15 +1,12 @@
 package com.breed.govern.service.impl;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.breed.govern.dto.param.FermentEndTestingParam;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.breed.govern.dto.vo.FermentListVo;
 import com.breed.govern.dto.vo.SelectFermentListVo;
 import com.breed.govern.entity.BFeedFerment;
 import com.breed.govern.entity.BFermentTesting;
 import com.breed.govern.mapper.BFeedFermentMapper;
 import com.breed.govern.service.IBFeedFermentService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.breed.govern.service.IBFermentTestingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,24 +57,19 @@ public class BFeedFermentServiceImpl extends ServiceImpl<BFeedFermentMapper, BFe
     }
 
     @Override
-    public List<FermentListVo> getFermentList(String selectDay) {
-        String year = "";
-        String month = "";
-        if (selectDay != null && selectDay != "") {
-            String[] split = selectDay.split("-");
-            year = split[0];
-            month = split[1];
-        }
-        return baseMapper.getFermentList(year, month);
+    public List<FermentListVo> getFermentList(int fermentStatus) {
+        return baseMapper.getFermentList(fermentStatus);
     }
 
     @Override
-    public BFeedFerment getFeedFermentById(Integer id) {
+    public BFeedFerment getFeedFermentById(long id) {
         return baseMapper.selectById(id);
     }
 
     @Override
     public List<SelectFermentListVo> getSelectFermentList() {
+        List<SelectFermentListVo> list = baseMapper.getSelectFermentList();
+
         return baseMapper.getSelectFermentList();
     }
 }

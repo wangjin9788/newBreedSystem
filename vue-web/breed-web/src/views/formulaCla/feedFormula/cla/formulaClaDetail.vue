@@ -74,6 +74,7 @@ const defaultcla = {
   weightUnit:"斤",
   formulaStr: [],
   results: [],
+  mark:0
 
 };
 export default {
@@ -120,6 +121,7 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
+            this.cla.mark=this.$route.query.mark
             sendMail(this.cla).then(response => {
               this.$refs[formName].resetFields();
               this.resetForm(formName);

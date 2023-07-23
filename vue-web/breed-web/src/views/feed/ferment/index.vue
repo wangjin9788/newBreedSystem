@@ -38,79 +38,159 @@
       </el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="revenueTable"
-                :data="list"
-                style="width: 100%;"
-                v-loading="listLoading" border>
-        <el-table-column label="编号" width="100" align="center" >
-          <template slot-scope="scope">{{ scope.row.ffId }}</template>
-        </el-table-column>
-        <el-table-column label="发酵原料" align="center">
-          <template slot-scope="scope">
-            <span class="ql-editor" v-html="scope.row.fermentInfo"></span>
-          </template>
-        </el-table-column>
-        <el-table-column label="发酵天数" align="center">
-          <template slot-scope="scope">{{ scope.row.fermentDay }}</template>
-        </el-table-column>
-        <el-table-column label="状态" align="center">
-          <template slot-scope="scope">
-            <span v-if="scope.row.status==0">发酵中</span>
-            <span v-else>发酵结束</span> </template>
-        </el-table-column>
+      <el-tabs v-model="activeName" @tab-click="getFermentList">
+        <el-tab-pane label="发酵中"  name="ferment">
+          <el-table ref="revenueTable"
+                    :data="list"
+                    style="width: 100%;"
+                    v-loading="listLoading" border>
+            <el-table-column label="编号" width="100" align="center" >
+              <template slot-scope="scope">{{ scope.row.ffId }}</template>
+            </el-table-column>
+            <el-table-column label="发酵原料" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-html="scope.row.fermentInfo"></span>
+              </template>
+            </el-table-column>
+            <el-table-column label="发酵天数" align="center">
+              <template slot-scope="scope">{{ scope.row.fermentDay }}</template>
+            </el-table-column>
+            <el-table-column label="状态" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.status==0">发酵中</span>
+                <span v-else>发酵结束</span> </template>
+            </el-table-column>
 
-        <el-table-column label="图片" align="center">
-          <template slot-scope="scope">
-            <img style="height:80px" v-image-preview :src="scope.row.createImage">
-          </template>
-        </el-table-column>
-        <el-table-column label="发酵时间" align="center">
-          <template slot-scope="scope">{{ scope.row.fermentTime }}</template>
-        </el-table-column>
-        <el-table-column label="结束标识" width="100" align="center">
-          <template slot-scope="scope">
-            <el-switch
-              @change="handleStatusChange(scope.$index, scope.row)"
-              :active-value="1"
-              :inactive-value="0"
-              v-model="scope.row.status"
-              :disabled="scope.row.status==1 ? true:false">
-            </el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column label="查看数据" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleEndTestingInfo(scope.$index, scope.row)">结束检测信息
-              </el-button>
-            </el-row>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleUpdate(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button size="mini"
-                         type="text"
-                         @click="handleDelete(scope.$index, scope.row)">删除
-              </el-button>
-            </el-row>
-            <el-row>
-              <el-button size="mini"
-                         type="text"
-                         @click="handleDetail(scope.$index, scope.row)">发酵详情
-              </el-button>
-            </el-row>
-          </template>
-        </el-table-column>
-      </el-table>
+            <el-table-column label="图片" align="center">
+              <template slot-scope="scope">
+                <img style="height:80px" v-image-preview :src="scope.row.createImage">
+              </template>
+            </el-table-column>
+            <el-table-column label="发酵时间" align="center">
+              <template slot-scope="scope">{{ scope.row.fermentTime }}</template>
+            </el-table-column>
+            <el-table-column label="结束标识" width="100" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  @change="handleStatusChange(scope.$index, scope.row)"
+                  :active-value="1"
+                  :inactive-value="0"
+                  v-model="scope.row.status"
+                  :disabled="scope.row.status==1 ? true:false">
+                </el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="查看数据" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleEndTestingInfo(scope.$index, scope.row)">结束检测信息
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleUpdate(scope.$index, scope.row)">编辑
+                  </el-button>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDelete(scope.$index, scope.row)">删除
+                  </el-button>
+                </el-row>
+                <el-row>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDetail(scope.$index, scope.row)">发酵详情
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="已完成"  name="fermentSuccess">
+          <el-table ref="revenueTable"
+                    :data="list"
+                    style="width: 100%;"
+                    v-loading="listLoading" border>
+            <el-table-column label="编号" width="100" align="center" >
+              <template slot-scope="scope">{{ scope.row.ffId }}</template>
+            </el-table-column>
+            <el-table-column label="发酵原料" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-html="scope.row.fermentInfo"></span>
+              </template>
+            </el-table-column>
+            <el-table-column label="发酵天数" align="center">
+              <template slot-scope="scope">{{ scope.row.fermentDay }}</template>
+            </el-table-column>
+            <el-table-column label="状态" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.status==0">发酵中</span>
+                <span v-else>发酵结束</span> </template>
+            </el-table-column>
+
+            <el-table-column label="图片" align="center">
+              <template slot-scope="scope">
+                <img style="height:80px" v-image-preview :src="scope.row.createImage">
+              </template>
+            </el-table-column>
+            <el-table-column label="发酵时间" align="center">
+              <template slot-scope="scope">{{ scope.row.fermentTime }}</template>
+            </el-table-column>
+            <el-table-column label="结束标识" width="100" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  @change="handleStatusChange(scope.$index, scope.row)"
+                  :active-value="1"
+                  :inactive-value="0"
+                  v-model="scope.row.status"
+                  :disabled="scope.row.status==1 ? true:false">
+                </el-switch>
+              </template>
+            </el-table-column>
+            <el-table-column label="查看数据" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleEndTestingInfo(scope.$index, scope.row)">结束检测信息
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleUpdate(scope.$index, scope.row)">编辑
+                  </el-button>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDelete(scope.$index, scope.row)">删除
+                  </el-button>
+                </el-row>
+                <el-row>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDetail(scope.$index, scope.row)">发酵详情
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
+
     </div>
     <div class="pagination-container">
       <el-pagination
@@ -132,7 +212,7 @@ import {fetchList, deleteFerment} from '@/api/ferment';
 const defaultListQuery = {
   pageNum: 1,
   pageSize: 5,
-  selectDay:'',
+  fermentStatus:0,
 };
 export default {
 
@@ -142,6 +222,7 @@ export default {
       list: null,
       total: null,
       listLoading: false,
+      activeName: 'ferment'
     }
   },
   created() {
@@ -217,17 +298,23 @@ export default {
      */
     getList() {
       this.listLoading = true;
-      //获取当前时间
-      var now = new Date();
-      var monthn = now.getMonth() + 1;
-      var yearn = now.getFullYear();
-      this.selectDay = yearn + "-" + monthn;
       fetchList(this.listQuery).then(response => {
         this.listLoading = false;
         this.list = response.data;
         this.total = response.data.total;
       });
 
+    },
+    getFermentList(tab, event){
+     this.listQuery.fermentStatus =0;
+      if(tab.name=='fermentSuccess'){
+        this.listQuery.fermentStatus=1;
+      }
+      fetchList(this.listQuery).then(response => {
+        this.listLoading = false;
+        this.list = response.data;
+        this.total = response.data.total;
+      });
     }
   }
 }

@@ -23,13 +23,14 @@ public class BFermentDetailServiceImpl extends ServiceImpl<BFermentDetailMapper,
 
     @Override
     public int createFermentDetail(BFermentDetail data) {
-        data.setCreateTime(LocalDateTime.now());
         return baseMapper.insert(data);
 
     }
 
     @Override
     public int updateFermentDetail(BFermentDetail data) {
+
+
         return baseMapper.updateById(data);
     }
 

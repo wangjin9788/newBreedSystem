@@ -1,5 +1,16 @@
 <template> 
   <div class="app-container">
+    <el-card class="operate-container" shadow="never">
+      <i class="el-icon-tickets"></i>
+      <span>数据列表</span>
+      <el-button
+        type="primary"
+        class="btn-add"
+        @click="handleAddBreed()"
+        size="mini">
+        添加
+      </el-button>
+    </el-card>
     <div class="table-container">
       <el-table ref="revenueTable"
                 :data="list"
@@ -19,7 +30,6 @@
         <el-table-column label="堆温" align="center">
           <template slot-scope="scope">{{ scope.row.heapHead }}</template>
         </el-table-column>
-
         <el-table-column label="记录时间" align="center">
           <template slot-scope="scope">{{ scope.row.createTime }}</template>
         </el-table-column>
@@ -48,7 +58,7 @@
         layout="total, sizes,prev, pager, next,jumper"
         :current-page.sync="listQuery.pageNum"
         :page-size="listQuery.pageSize"
-        :page-sizes="[10,15,20]"
+        :page-sizes="[50,80,100,]"
         :total="total">
       </el-pagination>
     </div>
@@ -59,7 +69,7 @@ import {fetchList, deleteFermentDetail} from '@/api/dayFermentDetail';
 
 const defaultListQuery = {
   pageNum: 1,
-  pageSize: 5,
+  pageSize: 50,
   ffId:0,
 };
 export default {

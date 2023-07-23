@@ -17,6 +17,6 @@ import java.util.List;
  * @since 2022-12-03
  */
 public interface BFeedFermentMapper extends BaseMapper<BFeedFerment> {
-    List<FermentListVo> getFermentList(@Param(value = "year") String year, @Param(value = "month")String month);
+    List<FermentListVo> getFermentList(@Param(value = "fermentStatus")  int fermentStatus);
     List<SelectFermentListVo> getSelectFermentList();
 }

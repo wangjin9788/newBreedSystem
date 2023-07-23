@@ -50,16 +50,16 @@ export const asyncRouterMap = [
         meta: {title: '生物学特性',icon: 'breed-info',number:1},
       },
       {
-        path: 'growBreed',
-        name: 'growBreed',
+        path: 'feedingManagement',
+        name: 'feedingManagement',
         component: () => import('@/views/breedData/index'),
-        meta: {title: '生长繁殖育种特点',icon: 'breed-info',number:2}
+        meta: {title: '饲养管理',icon: 'breed-info',number:2}
       },
       {
         path: 'breedPattern',
         name: 'breedPattern',
         component: () => import('@/views/breedData/index'),
-        meta: {title: '养殖方式',icon: 'breed-info',number:3}
+        meta: {title: '饲养方式',icon: 'breed-info',number:3}
       },
       {
         path: 'feedPreparation',
@@ -68,16 +68,22 @@ export const asyncRouterMap = [
         meta: {title: '饲料配置',icon: 'breed-info',number:4}
       },
       {
-        path: 'feedingManagement',
-        name: 'feedingManagement',
+        path: 'growBreed',
+        name: 'growBreed',
         component: () => import('@/views/breedData/index'),
-        meta: {title: '饲养管理',icon: 'breed-info',number:5}
+        meta: {title: '繁殖/育种',icon: 'breed-info',number:5}
       },
       {
         path: 'diseaseControl',
         name: 'diseaseControl',
         component: () => import('@/views/breedData/index'),
         meta: {title: '病害防治',icon: 'breed-info',number:6}
+      },
+      {
+        path: 'processSummary',
+        name: 'processSummary',
+        component: () => import('@/views/breedData/index'),
+        meta: {title: '流程总结',icon: 'breed-info',number:29}
       },
       {
         path: 'addBreedData',

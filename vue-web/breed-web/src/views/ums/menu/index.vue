@@ -97,7 +97,7 @@
         listLoading: true,
         listQuery: {
           pageNum: 1,
-          pageSize: 5
+          pageSize: 20
         },
         parentId: 0
       }
