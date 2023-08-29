@@ -9,18 +9,21 @@
       <el-form-item style="width : 60%" label="养殖信息编号：" prop="operation" isEdit>
         <el-input v-model="operation.bid" readonly="readonly"></el-input>
       </el-form-item>
-      <el-form-item style="width : 60%" label="操作类型：" prop="operation" isEdit>
-        <el-select v-model="operation.olId" placeholder="请选择类型">
+      <el-form-item style="width : 60%" label="操作类型：">
+        <el-select v-model="operation.type" placeholder="请选择类型" style="display: block">
           <el-option
-            v-for="item in selectLabelLists"
-            :key="item.olId"
-            :label="item.labelContent"
-            :value="item.olId">
+            v-for="item in evnOptions"
+            :key="item.type"
+            :label="item.value"
+            :value="item.type">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item style="width : 60%" label="基本操作：" prop="operation" isEdit>
-        <el-input v-model="operation.content"></el-input>
+      <el-form-item  label="操作原因：" prop="operation" isEdit>
+        <VueQuill  :cont="content" v-model="operation.reason" ></VueQuill>
+      </el-form-item>
+      <el-form-item  label="操作内容：" prop="operation" isEdit>
+        <VueQuill  :cont="content" v-model="operation.content" ></VueQuill>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('operationFrom')">提交</el-button>
@@ -32,10 +35,10 @@
 
 <script>
 import {fetchList, createOperation, updateOperation, getOperationInfo} from '@/api/operation';
-import {selectLabelList} from '@/api/operationLabel';
 
 const defaultOperation = {
-  bid: 0
+  bid: 0,
+  type:0
 };
 export default {
   name: "operation",
@@ -49,9 +52,8 @@ export default {
   data() {
     return {
       operation: Object.assign({}, defaultOperation),
-      selectLabelLists: selectLabelList().then(response => {
-        this.selectLabelLists = response.data;
-      }),
+      evnOptions: [{type: 0, value: '普通操作'}, {type: 1, value: '药物操作'}, {type: 2, value: '营养/菌液操作'}],
+
     }
   },
   created() {
@@ -59,16 +61,17 @@ export default {
     if (this.isEdit) {
       getOperationInfo(this.$route.query.id).then(response => {
         this.operation = response.data;
+
       });
     } else {
       this.operation = Object.assign({}, defaultOperation);
       this.operation.bid = this.$route.query.bid;
     }
-    this.getSelectOperationList(this.operation.bid);
+    this.operation.type = this.$route.query.type
   },
   methods: {
-    getSelectOperationList(bid) {
-      fetchList( {bid,pageSize: 100, pageNum: 1}).then(response => {
+    getSelectOperationList(bid,type) {
+      fetchList( {bid,type,pageSize: 100, pageNum: 1}).then(response => {
         this.selectOperationList = response.data;
       });
 
@@ -117,7 +120,7 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.operation = Object.assign({}, defaultOperation);
-      this.getSelectOperationList(this.operation.bid);
+      this.getSelectOperationList(this.operation.bid,this.operation.type);
     },
   }
 }

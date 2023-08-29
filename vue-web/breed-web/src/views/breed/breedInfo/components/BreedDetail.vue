@@ -7,9 +7,6 @@
       <el-form-item v-show="false"   label="id：" prop="breed" isEdit>
         <el-input v-model.trim="breed.bid"></el-input>
       </el-form-item>
-      <el-form-item  label="栏位编号：" prop="breed" >
-        <el-input v-model.trim="breed.number"></el-input>
-      </el-form-item>
       <el-form-item label="养殖模型：">
         <el-select v-model="breed.bmId" placeholder="请选择模型" style="display: block">
           <el-option
@@ -41,10 +38,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="规格：">
-        <el-select v-model="breed.breedMark" placeholder="请选择规格" style="display: block">
+        <el-select v-model="breed.specifications" placeholder="请选择规格" style="display: block">
           <el-option
             v-for="item in specificationsOption"
-            :key="item. specifications"
+            :key="item.specifications"
             :label="item.value"
             :value="item. specifications">
           </el-option>
@@ -59,7 +56,7 @@
           placeholder="选择日期时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item  label="投入重量(条)：" prop="breed" isEdit>
+      <el-form-item  label="投入重量(斤)：" prop="breed" isEdit>
         <el-input v-model.trim="breed.inputWeight"></el-input>
       </el-form-item>
       <el-form-item  label="养殖面积㎡：" prop="breed" isEdit>
@@ -102,7 +99,7 @@ export default {
         this.selectBreedLists = response.data;
       }),
       evnOptions: [{type: 0, value: '室内'}, {type: 1, value: '室外'}],
-      healthyOption: [{breedMark: 0, value: '健康'}, {breedMark: 1, value: '一般'}, {breedMark: 1, value: '差'}],
+      healthyOption: [{breedMark: 0, value: '健康'}, {breedMark: 1, value: '一般'}, {breedMark: 2, value: '差'}],
       specificationsOption: [{specifications: 1, value: '小蚯蚓'}, {specifications: 2, value: '中蚯蚓'}, {specifications: 3, value: '大蚯蚓'}]
     }
   },

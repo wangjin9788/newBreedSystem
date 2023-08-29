@@ -26,8 +26,6 @@ public class TestingListVo {
     private String symptom;
     //病蚓图片
     private String imgUrl;
-    //操作引起
-    private String content;
     //症状信息
     private String symptomName;
 

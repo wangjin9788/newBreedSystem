@@ -11,10 +11,8 @@
                t.testing_time      as testingTime,
                t.disease           as disease,
                t.img_url           as imgUrl,
-               b.content           as content,
                t.symptom           as symptom
         FROM b_testing t
-                 LEFT JOIN b_operation b on b.o_id = t.o_id
         WHERE t.b_id = #{bid};
     </select>
     <select id="getLabelInfo" resultType="string">

@@ -5,7 +5,6 @@ import com.breed.govern.dto.data.OperationBatchData;
 import com.breed.govern.dto.vo.OperationListVo;
 import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BOperation;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public interface IBOperationService extends IService<BOperation> {
 
     int updateOperation(BOperation data);
 
-    List<OperationListVo> getOperationList(long bid);
+    List<OperationListVo> getOperationList(long bid,int type);
 
     BOperation getOperationById(long id);
 

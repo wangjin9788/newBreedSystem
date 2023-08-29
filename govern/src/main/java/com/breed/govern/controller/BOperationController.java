@@ -56,8 +56,9 @@ public class BOperationController {
 
     @ApiOperation("获取操作标签信息")
     @GetMapping(value = "/list")
-    public CommonResult<List<OperationListVo>> getOperationList(@RequestParam(value = "bid") long bid) {
-        List<OperationListVo> evaluateList = operationService.getOperationList(bid);
+    public CommonResult<List<OperationListVo>> getOperationList(@RequestParam(value = "bid") long bid,
+                                                                @RequestParam(value = "type") int type) {
+        List<OperationListVo> evaluateList = operationService.getOperationList(bid,type);
         return CommonResult.success(evaluateList);
     }
 

@@ -10,6 +10,7 @@ import com.breed.govern.service.IBBreedService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class BBreedServiceImpl extends ServiceImpl<BBreedMapper, BBreed> impleme
 
     @Override
     public int createBreed(BBreed breed) {
+        breed.setCreateTime(LocalDateTime.now());
         return baseMapper.insert(breed);
     }
 

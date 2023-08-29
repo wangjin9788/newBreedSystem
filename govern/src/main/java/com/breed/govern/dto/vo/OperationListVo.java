@@ -6,7 +6,8 @@ import lombok.Data;
 public class OperationListVo {
 
     private long oid;
-    private String labelInfo;
+    private int type;
+    private String reason;
     private String content;
     private String createTime;
 }

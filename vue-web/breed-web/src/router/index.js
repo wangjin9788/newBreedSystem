@@ -220,20 +220,6 @@ export const asyncRouterMap = [
         hidden: true
       },
       {
-        path: 'addOperationLabel',
-        name: 'addOperationLabel',
-        component: () => import('@/views/breed/operationLabel/add'),
-        meta: {title: '添加操作标签信息'},
-        hidden: true
-      },
-      {
-        path: 'updateOperationLabel',
-        name: 'updateOperationLabel',
-        component: () => import('@/views/breed/operationLabel/update'),
-        meta: {title: '修改操作标签信息'},
-        hidden: true
-      },
-      {
         path: 'testing',
         name: 'testing',
         component: () => import('@/views/breed/testing/index'),
@@ -255,20 +241,6 @@ export const asyncRouterMap = [
         hidden: true
       },
       {
-        path: 'addExcLabel',
-        name: 'addExcLabel',
-        component: () => import('@/views/breed/excLabel/add'),
-        meta: {title: '添加异常标签信息'},
-        hidden: true
-      },
-      {
-        path: 'updateExcLabel',
-        name: 'updateExcLabel',
-        component: () => import('@/views/breed/excLabel/update'),
-        meta: {title: '修改异常标签信息'},
-        hidden: true
-      },
-      {
         path: 'summary',
         name: 'summary',
         component: () => import('@/views/breed/treatSummary/index'),
@@ -279,13 +251,6 @@ export const asyncRouterMap = [
         name: 'summaryOperationInfo',
         component: () => import('@/views/breed/treatSummary/operation/index'),
         meta: {title: '总结操作信息'},
-        hidden: true
-      },
-      {
-        path: 'excInfo',
-        name: 'excInfo',
-        component: () => import('@/views/breed/excInfo/index'),
-        meta: {title: '治疗信息'},
         hidden: true
       },
       {

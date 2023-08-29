@@ -30,20 +30,21 @@ public class BOperation implements Serializable {
     private Long oId;
 
     /**
-     * 操作标签id
-     */
-    private Integer olId;
-
-    /**
      * 养殖表id
      */
     private Long bId;
-
+    /**
+     * 类型
+     */
+    private int type;
     /**
      * 内容
      */
     private String content;
-
+    /**
+     * 原因
+     */
+    private String reason;
     /**
      * 创建时间
      */

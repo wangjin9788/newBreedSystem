@@ -19,7 +19,8 @@ import java.util.List;
  */
 public interface BOperationMapper extends BaseMapper<BOperation> {
 
-    List<OperationListVo> getOperationList(@Param(value = "bid") long bid);
+    List<OperationListVo> getOperationList(@Param(value = "bid") long bid,
+                                           @Param(value = "type") long type);
 
     List<SelectOperationList>selectOperationList();
 

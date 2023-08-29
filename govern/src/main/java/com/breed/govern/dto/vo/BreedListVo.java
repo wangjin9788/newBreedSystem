@@ -7,8 +7,6 @@ import java.util.Date;
 @Data
 public class BreedListVo {
     private long bid;
-    //栏位编号
-    private int number;
     //养殖类型(0:室内  1：室外)
     private int type;
     //养殖方式
@@ -25,6 +23,6 @@ public class BreedListVo {
     private String inputTime;
     //规格
     private int  specifications;
-    //治疗状态
-    private int excStatus=1;
+    //养殖环境
+    private int pattern;
 }

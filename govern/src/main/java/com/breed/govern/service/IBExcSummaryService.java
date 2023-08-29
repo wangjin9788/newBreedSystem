@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IBExcSummaryService extends IService<BExcSummary> {
 
-    long getSummaryByLabel(String data);
+    Long getSummaryByLabel(String data);
 
     List<BExcSummary> getSummaryList();
 

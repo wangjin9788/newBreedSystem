@@ -20,7 +20,7 @@ import java.util.List;
 public class BExcSummaryServiceImpl extends ServiceImpl<BExcSummaryMapper, BExcSummary> implements IBExcSummaryService {
 
     @Override
-    public long getSummaryByLabel(String data) {
+    public Long getSummaryByLabel(String data) {
         return baseMapper.getSummaryByLabel(data);
     }
 

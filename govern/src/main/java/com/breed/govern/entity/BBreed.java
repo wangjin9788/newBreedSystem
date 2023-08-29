@@ -33,10 +33,6 @@ public class BBreed implements Serializable {
 
 
     /**
-     * 养殖编号
-     */
-    private Integer number;
-    /**
      * 养殖模式
      */
     private Long bmId;
@@ -70,7 +66,6 @@ public class BBreed implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime createTime;
 
     /**

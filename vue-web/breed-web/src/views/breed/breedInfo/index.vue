@@ -47,16 +47,13 @@
                 :cell-class-name="back"
                 v-loading="listLoading" border
                 :row-class-name="tableRowClassName">
-        <el-table-column label="编号" width="100" align="center" v-if='false'>
+        <el-table-column label="编号" width="100" align="center" >
           <template slot-scope="scope">{{ scope.row.bid }}</template>
-        </el-table-column>
-        <el-table-column label="栏位编号" width="100" align="center">
-          <template slot-scope="scope">{{ scope.row.number }}</template>
         </el-table-column>
         <el-table-column label="养殖环境" align="center">
           <template slot-scope="scope">
-            <span v-if="scope.row.pattern==0">室内</span>
-            <span v-else>室外</span>
+            <span v-if="scope.row.type==0">室内</span>
+            <span v-if="scope.row.type==1">室外</span>
           </template>
         </el-table-column>
         <el-table-column label="养殖方式" align="center">
@@ -72,11 +69,15 @@
         <el-table-column label="养殖面积㎡" align="center">
           <template slot-scope="scope">{{ scope.row.extent }}</template>
         </el-table-column>
-        <el-table-column label="投入重量(条)" align="center">
+        <el-table-column label="投入重量(斤)" align="center">
           <template slot-scope="scope">{{ scope.row.inputWeight }}</template>
         </el-table-column>
         <el-table-column label="健康状态" align="center">
-          <template slot-scope="scope">{{ scope.row.breedMark }}</template>
+          <template slot-scope="scope">
+            <span v-if="scope.row.breedMark==0">健康</span>
+            <span v-if="scope.row.breedMark==1">一般</span>
+            <span v-if="scope.row.breedMark==2">较差</span>
+            </template>
         </el-table-column>
         <el-table-column label="养殖状态" width="100" align="center">
           <template slot-scope="scope">
@@ -102,16 +103,11 @@
               </el-button>
               <el-button size="mini"
                          type="text"
-                         @click="handleOperation(scope.$index, scope.row)">日常操作
+                         @click="handleOperation(scope.$index, scope.row)">养殖操作
               </el-button>
 
             </el-row>
             <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleTreatment(scope.$index, scope.row)">治疗信息
-              </el-button>
               <el-button size="mini"
                          type="text"
                          @click="handleOutInfo(scope.$index, scope.row)">产出信息
@@ -217,10 +213,6 @@ export default {
     /**检测信息跳转 **/
     handleTesting(index, row) {
       this.$router.push({path: '/breed/testing', query: {bid: row.bid}});
-    },
-    /**检测信息跳转 **/
-    handleTreatment(index, row) {
-      this.$router.push({path: '/breed/excInfo', query: {bid: row.bid}});
     },
 
     /**检测信息跳转 **/

@@ -3,12 +3,13 @@
 <mapper namespace="com.breed.govern.mapper.BOperationMapper">
     <select id="getOperationList" resultType="com.breed.govern.dto.vo.OperationListVo">
         SELECT o.o_id          AS oid,
+               o.type          AS type,
+               o.reason        AS reason,
                o.content       AS content,
-               o.create_time   AS createTime,
-               l.label_content AS labelInfo
+               o.create_time   AS createTime
         FROM b_operation o
-                 LEFT JOIN b_operation_label l ON o.ol_id = l.ol_id
         where o.b_id = #{bid}
+            and o.type= #{type}
     </select>
     <select id="selectOperationList" resultType="com.breed.govern.dto.vo.SelectOperationList">
         SELECT o_id    AS oid,

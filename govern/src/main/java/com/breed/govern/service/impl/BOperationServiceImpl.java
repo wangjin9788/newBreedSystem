@@ -5,10 +5,8 @@ import com.breed.govern.dto.vo.OperationListVo;
 import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BOperation;
 import com.breed.govern.mapper.BOperationMapper;
-import com.breed.govern.service.IBExcSummaryService;
 import com.breed.govern.service.IBOperationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,8 +35,8 @@ public class BOperationServiceImpl extends ServiceImpl<BOperationMapper, BOperat
     }
 
     @Override
-    public List<OperationListVo> getOperationList(long bid) {
-        return baseMapper.getOperationList(bid);
+    public List<OperationListVo> getOperationList(long bid, int type) {
+        return baseMapper.getOperationList(bid,type);
     }
 
     @Override

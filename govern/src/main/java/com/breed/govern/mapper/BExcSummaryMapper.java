@@ -14,5 +14,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface BExcSummaryMapper extends BaseMapper<BExcSummary> {
 
-    long getSummaryByLabel(@Param(value = "data")String data);
+    Long getSummaryByLabel(@Param(value = "data")String data);
 }

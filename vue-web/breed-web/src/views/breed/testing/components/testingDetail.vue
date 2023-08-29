@@ -24,32 +24,12 @@
       <el-form-item style="width : 60%" label="养殖湿度：" prop="testing" isEdit>
         <el-input v-model="testing.breedHumidity"></el-input>
       </el-form-item>
-      <el-form-item label="关联操作：">
-        <el-select v-model="testing.oid" placeholder="请选择操作" style="width : 60% ;display: block">
-          <el-option
-            v-for="item in selectOpeartionLists"
-            :key="item.oid"
-            :label="item.content"
-            :value="item.oid">
-          </el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="病症状态:">
         <el-radio-group v-model="testing.disease">
           <el-radio :label="0">无</el-radio>
           <el-radio :label="1">有</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="病害标签：" v-show="testing.disease==1">
-        <el-select v-model="testing.symptom" multiple clearable  style="width : 60% ;display: block">
-          <el-option
-            v-for="item in selectExcLabelLists"
-            :key="item.symptom"
-            :label="item.excLabel"
-            :value="item.symptom">
-          </el-option>
-        </el-select>
-      </el-form-item >
       <el-form-item label="图片：" v-show="testing.disease==1">
         <template slot-scope="scope">
           <single-upload v-model="testing.imgUrl"></single-upload>
@@ -67,8 +47,6 @@
 <script>
 import {getTestingInfo, fetchList, updateTesting, createTesting} from '@/api/testing';
 import SingleUpload from '@/components/Upload/singleUpload';
-import  {selectOperation} from '@/api/operation';
-import  {selectExcLabelList} from '@/api/excLabel';
 const defaultTesting = {
   pageSize: 100,
   pageNum: 1,
@@ -86,12 +64,6 @@ export default {
   data() {
     return {
       testing: Object.assign({}, defaultTesting),
-      selectOpeartionLists:selectOperation().then(response => {
-        this.selectOpeartionLists = response.data;
-      }),
-      selectExcLabelLists:selectExcLabelList().then(response => {
-        this.selectExcLabelLists = response.data;
-      }),
     }
   },
   created() {

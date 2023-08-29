@@ -37,14 +37,6 @@
         size="mini">
         添加
       </el-button>
-      <el-button
-        style="float:right;margin-right: 15px"
-        type="primary"
-        class="btn-add"
-        @click="handleAddLabel()"
-        size="mini">
-        添加标签
-      </el-button>
     </el-card>
     <div class="table-container">
       <el-table ref="revenueTable"
@@ -82,9 +74,6 @@
           <template slot-scope="scope">
             <img style="height:80px" v-image-preview :src="scope.row.imgUrl">
           </template>
-        </el-table-column>
-        <el-table-column label="操作引起" align="center">
-          <template slot-scope="scope">{{ scope.row.content }}</template>
         </el-table-column>
         <el-table-column label="检测时间" align="center">
           <template slot-scope="scope">{{ scope.row.testingTime }}</template>
@@ -172,10 +161,6 @@ export default {
     /**跳转编辑 **/
     handleUpdate(index, row) {
       this.$router.push({path: '/breed/updateTesting', query: {id: row.tid}});
-    },
-    /**跳转添加标签 **/
-    handleAddLabel() {
-      this.$router.push({path: '/breed/addExcLabel'});
     },
     /** 删除页面**/
     handleDelete(index, row) {

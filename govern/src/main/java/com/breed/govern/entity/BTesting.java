@@ -38,10 +38,6 @@ public class BTesting implements Serializable {
      * 正常操作表id
      */
     private Long bId;
-    /**
-     * 正常操作表id
-     */
-    private long oId;
 
     /**
      * 天气
@@ -89,10 +85,6 @@ public class BTesting implements Serializable {
      */
     private String imgUrl;
 
-    /**
-     * 类型（0：未知  1：操作不当）
-     */
-    private Integer type;
 
     /**
      * 创建时间

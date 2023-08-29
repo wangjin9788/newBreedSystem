@@ -36,63 +36,149 @@
         size="mini">
         添加
       </el-button>
-      <el-button
-        style="float:right;margin-right: 15px"
-        type="primary"
-        class="btn-add"
-        @click="handleAddLabel()"
-        size="mini">
-        添加标签
-      </el-button>
     </el-card>
-    <div class="table-container">
-      <el-table ref="revenueTable"
-                :data="list"
-                style="width: 100%;"
-                v-loading="listLoading" border>
-        <el-table-column label="编号" width="100" align="center" >
-          <template slot-scope="scope">{{ scope.row.oid }}</template>
-        </el-table-column>
-        <el-table-column label="操作类型" align="center">
-          <template slot-scope="scope">{{ scope.row.labelInfo }}</template>
-        </el-table-column>
-        <el-table-column label="操作内容" align="center">
-          <template slot-scope="scope">{{ scope.row.content }}</template>
-        </el-table-column>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="普通操作" name="generalOperation">
+          <div class="table-container">
+            <el-table ref="revenueTable"
+                      :data="list"
+                      style="width: 100%;"
+                      v-loading="listLoading" border>
+              <el-table-column label="编号" width="100" align="center" >
+                <template slot-scope="scope">{{ scope.row.oid }}</template>
+              </el-table-column>
+              <el-table-column label="操作原因" align="center">
+                <template slot-scope="scope">
+                <span class="ql-editor" v-viewer v-html=" scope.row.reason"></span>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作内容" align="center">
+                <template slot-scope="scope">
+                  <span class="ql-editor" v-html="scope.row.content"></span>
+                </template>
+              </el-table-column>
 
-        <el-table-column label="操作时间" align="center">
-          <template slot-scope="scope">{{ scope.row.createTime }}</template>
-        </el-table-column>
-        <el-table-column label="操作" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleUpdate(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button size="mini"
-                         type="text"
-                         @click="handleDelete(scope.$index, scope.row)">删除
-              </el-button>
-            </el-row>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <div class="pagination-container">
-      <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        layout="total, sizes,prev, pager, next,jumper"
-        :current-page.sync="listQuery.pageNum"
-        :page-size="listQuery.pageSize"
-        :page-sizes="[10,15,20]"
-        :total="total">
-      </el-pagination>
-    </div>
+              <el-table-column label="操作时间" align="center">
+                <template slot-scope="scope">{{ scope.row.createTime }}</template>
+              </el-table-column>
+              <el-table-column label="操作" width="160" align="center">
+                <template slot-scope="scope">
+                  <el-row>
+                    <el-button
+                      size="mini"
+                      type="text"
+                      @click="handleUpdate(scope.$index, scope.row)">编辑
+                    </el-button>
+                    <el-button size="mini"
+                               type="text"
+                               @click="handleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                  </el-row>
+                </template>
+              </el-table-column>
+            </el-table>
+
+        </div>
+        </el-tab-pane>
+      <el-tab-pane label="药物操作" name="drugOperation">
+        <div class="table-container">
+          <el-table ref="revenueTable"
+                    :data="list"
+                    style="width: 100%;"
+                    v-loading="listLoading" border>
+            <el-table-column label="编号" width="100" align="center" >
+              <template slot-scope="scope">{{ scope.row.oid }}</template>
+            </el-table-column>
+            <el-table-column label="操作原因" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-viewer v-html=" scope.row.reason"></span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作内容" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-html="scope.row.content"></span>
+              </template>
+            </el-table-column>
+
+            <el-table-column label="操作时间" align="center">
+              <template slot-scope="scope">{{ scope.row.createTime }}</template>
+            </el-table-column>
+            <el-table-column label="操作" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleUpdate(scope.$index, scope.row)">编辑
+                  </el-button>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDelete(scope.$index, scope.row)">删除
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="营养/菌液操作" name="nutritionOperation">
+        <div class="table-container">
+          <el-table ref="revenueTable"
+                    :data="list"
+                    style="width: 100%;"
+                    v-loading="listLoading" border>
+            <el-table-column label="编号" width="100" align="center" >
+              <template slot-scope="scope">{{ scope.row.oid }}</template>
+            </el-table-column>
+            <el-table-column label="操作原因" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-viewer v-html=" scope.row.reason"></span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作内容" align="center">
+              <template slot-scope="scope">
+                <span class="ql-editor" v-html="scope.row.content"></span>
+              </template>
+            </el-table-column>
+
+            <el-table-column label="操作时间" align="center">
+              <template slot-scope="scope">{{ scope.row.createTime }}</template>
+            </el-table-column>
+            <el-table-column label="操作" width="160" align="center">
+              <template slot-scope="scope">
+                <el-row>
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleUpdate(scope.$index, scope.row)">编辑
+                  </el-button>
+                  <el-button size="mini"
+                             type="text"
+                             @click="handleDelete(scope.$index, scope.row)">删除
+                  </el-button>
+                </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+
+        </div>
+      </el-tab-pane>
+    </el-tabs>
+      <div class="pagination-container">
+        <el-pagination
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          layout="total, sizes,prev, pager, next,jumper"
+          :current-page.sync="listQuery.pageNum"
+          :page-size="listQuery.pageSize"
+          :page-sizes="[10,15,20]"
+          :total="total">
+        </el-pagination>
+      </div>
   </div>
+
 </template>
 <script>
 import {fetchList, deleteOperation} from '@/api/operation';
@@ -102,6 +188,7 @@ const defaultListQuery = {
   pageSize: 5,
   selectDay:'',
   bid:0,
+  type:0
 };
 export default {
 
@@ -111,7 +198,7 @@ export default {
       list: null,
       total: null,
       listLoading: false,
-
+      activeName: 'generalOperation'
     }
   },
   created() {
@@ -146,13 +233,9 @@ export default {
     handleAddBreed() {
       this.$router.push({path: '/breed/addOperation', query: {bid: this.$route.query.bid}});
     },
-    /**跳转添加标签 **/
-    handleAddLabel() {
-      this.$router.push({path: '/breed/addOperationLabel'});
-    },
     /**跳转编辑 **/
     handleUpdate(index, row) {
-      this.$router.push({path: '/breed/updateOperation', query: {id: row.oid}});
+      this.$router.push({path: '/breed/updateOperation', query: {id: row.oid,type:row.type}});
     },
 
     /** 删除页面**/
@@ -170,6 +253,15 @@ export default {
           this.getList();
         });
       });
+    },
+    handleClick(tab, event) {
+      this.listQuery.type=0;
+      if(tab.name=='drugOperation'){
+        this.listQuery.type=1;
+      }else if (tab.name=='nutritionOperation'){
+        this.listQuery.type=2;
+      }
+        this.getList();
     },
     /**
      * 加载页面数据
